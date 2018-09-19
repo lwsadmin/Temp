@@ -1,0 +1,35 @@
+CREATE TABLE [dbo].[TBrand](
+	[Id] bigint NOT null primary key identity,
+	[TenantId] int NOT NULL,
+	[Title] [nvarchar](50) NOT NULL,
+	[Logo] [nvarchar](300) NULL,
+	[Sort] [int] NOT NULL,
+	[Remark] [nvarchar](500) NULL,
+	[Url] [nvarchar](500) NULL,
+	[Introduce] [nvarchar](max) null)
+
+GO
+INSERT [dbo].[TBrand] (  [TenantId], [Title], [Logo], [Sort], [Remark], [Url], [Introduce]) VALUES ( 1, N'OPPO', N'/Upload/LenovoAdmin/Images/2017/0507094148212897.jpeg', 1, N'创造性地推出电动旋转摄像头和超清画质等拍照技术，为全球20多个国家和地区的年轻人提供了出色的手机拍照体验', N'http://www.oppo.cn/', NULL)
+GO
+INSERT [dbo].[TBrand] (  [TenantId], [Title], [Logo], [Sort], [Remark], [Url], [Introduce]) VALUES ( 1, N'宏碁', N'/Upload/LenovoAdmin/Images/2017/0507092154897267.jpeg', 0, N'打破科技与人的藩篱', N'http://touch.acer.com.cn/', NULL)
+GO
+INSERT [dbo].[TBrand] (  [TenantId], [Title], [Logo], [Sort], [Remark], [Url], [Introduce]) VALUES ( 1, N'波司登', N'/Upload/LenovoAdmin/Images/2017/0507100014523535.jpeg', 1, N'核心羽绒服品牌包括波司登、雪中飞、康博和冰洁', N'www.sina.com', NULL)
+GO
+INSERT [dbo].[TBrand] (  [TenantId], [Title], [Logo], [Sort], [Remark], [Url], [Introduce]) VALUES ( 1, N'鄂尔多斯', N'/Upload/LenovoAdmin/Images/2017/0507100057831820.jpeg', 1, NULL, N'http://www.erdos.cn/', NULL)
+GO
+INSERT [dbo].[TBrand] (  [TenantId], [Title], [Logo], [Sort], [Remark], [Url], [Introduce]) VALUES ( 1, N'南极人', N'/Upload/LenovoAdmin/Images/2017/0507100322653376.jpeg', 1, NULL, N'http://www.nanjids.com/', NULL)
+GO
+INSERT [dbo].[TBrand] (  [TenantId], [Title], [Logo], [Sort], [Remark], [Url], [Introduce]) VALUES ( 1, N'华硕', N'/Upload/LenovoAdmin/Images/2017/0507090958336608.jpeg', 0, N'全球知名的电脑品牌', N'www.qq.com', NULL)
+GO
+INSERT [dbo].[TBrand] (  [TenantId], [Title], [Logo], [Sort], [Remark], [Url], [Introduce]) VALUES ( 1, N'以纯', N'/Upload/LenovoAdmin/Images/2017/0507095853967328.jpeg', 1, N'时尚休闲服装品牌,以其紧贴时尚、角逐设计，短短几年时间迅速成为国内外时尚休闲服饰知名品牌之一。', N'http://www.yishion.com.cn/', NULL)
+GO
+INSERT [dbo].[TBrand] (  [TenantId], [Title], [Logo], [Sort], [Remark], [Url], [Introduce]) VALUES ( 1, N'森马', N'/Upload/LenovoAdmin/Images/2017/0507095756391365.jpeg', 1, N'连续12年被评为中国服装行业销售、利润双百强', N'http://www.semirbiz.com', NULL)
+GO
+INSERT [dbo].[TBrand] (  [TenantId], [Title], [Logo], [Sort], [Remark], [Url], [Introduce]) VALUES ( 1, N'联想', N'/Upload/LenovoAdmin/Images/2017/0506092646291061.jpeg', 0, N'联想从事开发、制造及销售最可靠的、安全易用的技术产品。我们的成功源自于不懈地帮助客户提高生产力，提升生活品质。', N'http://www.baidu.com', NULL)
+GO
+INSERT [dbo].[TBrand] (  [TenantId], [Title], [Logo], [Sort], [Remark], [Url], [Introduce]) VALUES ( 1, N'雅戈尔', N'/Upload/LenovoAdmin/Images/2017/0507100145251549.jpeg', 1, N'品牌服装、地产开发、股权投资三大产业为主体，多元并进、专业化发展的经营格局', N'http://www.youngor.com/', NULL)
+GO
+INSERT [dbo].[TBrand] (  [TenantId], [Title], [Logo], [Sort], [Remark], [Url], [Introduce]) VALUES ( 1, N'三星', N'/Upload/LenovoAdmin/Images/2017/0507092427538432.jpeg', 0, N'部分地突破椭圆的束缚，将外界与内部结为一体', N'http://www.samsung.com/cn/', NULL)
+GO
+INSERT [dbo].[TBrand] (  [TenantId], [Title], [Logo], [Sort], [Remark], [Url], [Introduce]) VALUES ( 1, N'苹果', N'/Upload/LenovoAdmin/Images/2017/0507115834983236.jpeg', 0, N'Brand Finance发布2017年度全球500强品牌榜单，苹果公司排名第二', N'www.sina.com', NULL)
+GO
