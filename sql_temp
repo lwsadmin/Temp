@@ -33,3 +33,50 @@ INSERT [dbo].[TBrand] (  [TenantId], [Title], [Logo], [Sort], [Remark], [Url], [
 GO
 INSERT [dbo].[TBrand] (  [TenantId], [Title], [Logo], [Sort], [Remark], [Url], [Introduce]) VALUES ( 1, N'苹果', N'/Upload/LenovoAdmin/Images/2017/0507115834983236.jpeg', 0, N'Brand Finance发布2017年度全球500强品牌榜单，苹果公司排名第二', N'www.sina.com', NULL)
 GO
+
+
+USE [UnionMallDb]
+GO
+/****** Object:  Table [dbo].[TBusiness]    Script Date: 2018/9/19 16:10:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TBusiness](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[TenantId] [bigint] NOT NULL,
+	[BusinessName] [nvarchar](50) NOT NULL,
+	[AgentsId] [bigint] NULL,
+	[StoreCount] [bigint] NOT NULL CONSTRAINT [DF_TBusiness_StoreCount]  DEFAULT ((1)),
+	[IsSystemBusiness] [bit] NOT NULL,
+	[Contact] [nvarchar](50) NOT NULL,
+	[Tel] [nvarchar](50) NOT NULL,
+	[DueTime] [datetime] NULL,
+	[Sort] [int] NOT NULL,
+	[Memo] [nvarchar](500) NULL,
+	[IndustryId] [bigint] NULL,
+	[CreationTime] [datetime] NOT NULL,
+ CONSTRAINT [PK_TBusiness] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET IDENTITY_INSERT [dbo].[TBusiness] ON 
+
+GO
+INSERT [dbo].[TBusiness] ([Id], [TenantId], [BusinessName], [AgentsId], [StoreCount], [IsSystemBusiness], [Contact], [Tel], [DueTime], [Sort], [Memo], [IndustryId], [CreationTime]) VALUES (2, 1, N'联想集团', 1, 1, 1, N'柳传志', N'18956486532', CAST(N'2050-12-21 00:00:00.000' AS DateTime), 1, N'暂无备注信息', 1, CAST(N'2018-05-01 00:00:00.000' AS DateTime))
+GO
+INSERT [dbo].[TBusiness] ([Id], [TenantId], [BusinessName], [AgentsId], [StoreCount], [IsSystemBusiness], [Contact], [Tel], [DueTime], [Sort], [Memo], [IndustryId], [CreationTime]) VALUES (3, 1, N'以纯集团有限公司', 1, 1, 1, N'郭东林', N'18956486532', CAST(N'2050-12-21 00:00:00.000' AS DateTime), 1, N'公司的宗旨是为顾客呈奉物超所值的优质时尚服装。致力于通过提供平价、优质的时尚服饰，以引领热爱时尚热爱分享的人们的穿衣文化和生活方式。员工上下一心，为同一目标进发，成为顾客首选的服装品牌，并成为国际领先的时尚服饰零售品牌，致力迈向全球，在国际品牌上占一席位', 1, CAST(N'2018-05-01 00:00:00.000' AS DateTime))
+GO
+INSERT [dbo].[TBusiness] ([Id], [TenantId], [BusinessName], [AgentsId], [StoreCount], [IsSystemBusiness], [Contact], [Tel], [DueTime], [Sort], [Memo], [IndustryId], [CreationTime]) VALUES (4, 1, N'海澜之家股份有限公司', 1, 1, 1, N'周建平', N'16895623598', CAST(N'2050-12-21 00:00:00.000' AS DateTime), 1, N'暂无备注信息', 1, CAST(N'2018-05-01 00:00:00.000' AS DateTime))
+GO
+INSERT [dbo].[TBusiness] ([Id], [TenantId], [BusinessName], [AgentsId], [StoreCount], [IsSystemBusiness], [Contact], [Tel], [DueTime], [Sort], [Memo], [IndustryId], [CreationTime]) VALUES (5, 1, N'东风标致雪铁龙集团', 1, 1, 1, N'张勇', N'19863995965', CAST(N'2050-12-21 00:00:00.000' AS DateTime), 1, N'公司的宗旨是为顾客呈奉物超所值的优质时尚服装。致力于通过提供平价、优质的时尚服饰，以引领热爱时尚热爱分享的人们的穿衣文化和生活方式。员工上下一心，为同一目标进发，成为顾客首选的服装品牌，并成为国际领先的时尚服饰零售品牌，致力迈向全球，在国际品牌上占一席位', 1, CAST(N'2018-05-01 00:00:00.000' AS DateTime))
+GO
+INSERT [dbo].[TBusiness] ([Id], [TenantId], [BusinessName], [AgentsId], [StoreCount], [IsSystemBusiness], [Contact], [Tel], [DueTime], [Sort], [Memo], [IndustryId], [CreationTime]) VALUES (6, 1, N'北京小米科技有限责任公司', 1, 1, 1, N'雷军', N'18796532146', CAST(N'2050-12-21 00:00:00.000' AS DateTime), 1, N'暂无备注信息', 1, CAST(N'2018-05-01 00:00:00.000' AS DateTime))
+GO
+INSERT [dbo].[TBusiness] ([Id], [TenantId], [BusinessName], [AgentsId], [StoreCount], [IsSystemBusiness], [Contact], [Tel], [DueTime], [Sort], [Memo], [IndustryId], [CreationTime]) VALUES (7, 1, N'三星集团', 1, 1, 1, N'李秉喆', N'15896541259', CAST(N'2050-12-21 00:00:00.000' AS DateTime), 1, N'公司的宗旨是为顾客呈奉物超所值的优质时尚服装。致力于通过提供平价、优质的时尚服饰，以引领热爱时尚热爱分享的人们的穿衣文化和生活方式。员工上下一心，为同一目标进发，成为顾客首选的服装品牌，并成为国际领先的时尚服饰零售品牌，致力迈向全球，在国际品牌上占一席位', 1, CAST(N'2018-05-01 00:00:00.000' AS DateTime))
+GO
+SET IDENTITY_INSERT [dbo].[TBusiness] OFF
+GO
