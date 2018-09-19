@@ -80,3 +80,52 @@ INSERT [dbo].[TBusiness] ([Id], [TenantId], [BusinessName], [AgentsId], [StoreCo
 GO
 SET IDENTITY_INSERT [dbo].[TBusiness] OFF
 GO
+-----
+
+/****** Object:  Table [dbo].[TGoodsCategory]    Script Date: 2018/9/19 16:40:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TGoodsCategory](
+	[Id] bigint NOT null primary key identity,
+	[TenantId] int NOT NULL,
+	[Title] [nvarchar](50) NOT NULL,
+	[ParentId] bigint not null default 0,
+	[Sort] [int] NULL,
+	[Brand] [nvarchar](max) NULL,
+	[Remark] [nvarchar](500) null)
+go
+
+INSERT [dbo].[TGoodsCategory] ( [TenantId], [Title], [ParentId], [Sort], [Brand], [Remark] ) VALUES ( 1 ,   N'电脑整机', 0, 0, '', N'2')
+GO
+INSERT [dbo].[TGoodsCategory] ( [TenantId], [Title], [ParentId], [Sort], [Brand], [Remark] ) VALUES ( 1 ,   N'清洁', 0, 0, N'11','')
+GO
+INSERT [dbo].[TGoodsCategory] ( [TenantId], [Title], [ParentId], [Sort], [Brand], [Remark] ) VALUES (1 ,   N'内衣', 0, 0, '','')
+GO
+INSERT [dbo].[TGoodsCategory] ( [TenantId], [Title], [ParentId], [Sort], [Brand], [Remark] ) VALUES (1,   N'电脑', 0, 0,'', N'电脑销量比手机好得多')
+GO
+INSERT [dbo].[TGoodsCategory] ( [TenantId], [Title], [ParentId], [Sort], [Brand], [Remark] ) VALUES ( 1 ,   N'笔记本', 0, 0, '', N'笔记本必须是大品牌，高性能，低价格，够实惠')
+GO
+INSERT [dbo].[TGoodsCategory] ( [TenantId], [Title], [ParentId], [Sort], [Brand], [Remark] ) VALUES (1 ,   N'男装', 0,0,'', '')
+GO
+INSERT [dbo].[TGoodsCategory] ( [TenantId], [Title], [ParentId], [Sort], [Brand], [Remark] ) VALUES (1 ,   N'手机', 0, 0,'','')
+GO
+INSERT [dbo].[TGoodsCategory] ( [TenantId], [Title], [ParentId], [Sort], [Brand], [Remark] ) VALUES (1 ,   N'女装',0,0,'','')
+GO
+INSERT [dbo].[TGoodsCategory] ( [TenantId], [Title], [ParentId], [Sort], [Brand], [Remark] ) VALUES (1 ,   N'一体机', 0,0,'','')
+GO
+INSERT [dbo].[TGoodsCategory] ( [TenantId], [Title], [ParentId], [Sort], [Brand], [Remark] ) VALUES (1 ,   N'服装城', 0, 0, '','')
+GO
+INSERT [dbo].[TGoodsCategory] ( [TenantId], [Title], [ParentId], [Sort], [Brand], [Remark] ) VALUES ( 1 ,   N'护肤', 0, 0, N'1','')
+GO
+INSERT [dbo].[TGoodsCategory] ( [TenantId], [Title], [ParentId], [Sort], [Brand], [Remark] ) VALUES (1 ,   N'精油', 0, 0, '', N'化妆品。女性消费者居多')
+GO
+INSERT [dbo].[TGoodsCategory] ( [TenantId], [Title], [ParentId], [Sort], [Brand], [Remark] ) VALUES (1 ,   N'饰品', 0, 0, '', N'饰品暂时不分品牌')
+GO
+INSERT [dbo].[TGoodsCategory] ( [TenantId], [Title], [ParentId], [Sort], [Brand], [Remark] ) VALUES (1 ,   N'台式机', 0, 0, '', N'台式机青少年买家多')
+GO
+INSERT [dbo].[TGoodsCategory] ( [TenantId], [Title], [ParentId], [Sort], [Brand], [Remark] ) VALUES (1 ,   N'香水', 0, 0, '')
+GO
+INSERT [dbo].[TGoodsCategory] ( [TenantId], [Title], [ParentId], [Sort], [Brand], [Remark] ) VALUES (1 ,   N'平板电脑', 0, 0, N'1', '')
+GO
