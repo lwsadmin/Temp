@@ -1,2 +1,68 @@
 update TBalanceNote set Balance=Value where Balance<=0
 update TComment set CreationTime=DATEADD(MONTH, -1,CreationTime)
+
+
+USE [UnionMallDb]
+GO
+/****** Object:  Table [dbo].[TSmsTemplate]    Script Date: 2018/12/20 21:05:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TSmsTemplate](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[TenantId] [int] NOT NULL CONSTRAINT [DF_TSmsTemplate_TenantId]  DEFAULT ((1)),
+	[KeyName] [nvarchar](20) NOT NULL,
+	[Title] [nvarchar](50) NOT NULL,
+	[Template] [nvarchar](500) NOT NULL,
+	[IsEnable] [bit] NOT NULL,
+ CONSTRAINT [PK_TSmsTemplate] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET IDENTITY_INSERT [dbo].[TSmsTemplate] ON 
+
+GO
+INSERT [dbo].[TSmsTemplate] ([Id], [TenantId], [KeyName], [Title], [Template], [IsEnable]) VALUES (1, 1, N'TakeOutBookSms', N'外卖订单通知', N'您的会员{卡号}于{下单时间}在微信预定[{订单内容}]共{金额}元({支付方式}),配送地址:{送货地址}，请核实处理。', 1)
+GO
+INSERT [dbo].[TSmsTemplate] ([Id], [TenantId], [KeyName], [Title], [Template], [IsEnable]) VALUES (2, 1, N'GiftsOrderSms', N'礼品订单通知', N'您于{订购时间}在微信上订购{订购礼品}成功,验证码{验证码},请勿向他人泄露。', 1)
+GO
+INSERT [dbo].[TSmsTemplate] ([Id], [TenantId], [KeyName], [Title], [Template], [IsEnable]) VALUES (3, 1, N'ChangeMemberCard', N'会员换卡通知', N'您在{公司}的会员号{旧卡号}已变更为{新卡号}，请核实。', 0)
+GO
+INSERT [dbo].[TSmsTemplate] ([Id], [TenantId], [KeyName], [Title], [Template], [IsEnable]) VALUES (4, 1, N'GroupBuySms', N'团购短信通知', N'您于{团购时间}成功订购{团购名称},验证码:{验证码},使用时请出示此验证码，详情可微信查询。', 1)
+GO
+INSERT [dbo].[TSmsTemplate] ([Id], [TenantId], [KeyName], [Title], [Template], [IsEnable]) VALUES (5, 1, N'BillConsumeSms', N'订单消费短信', N'您的订单验证密码:{验证码}于{消费时间}在[{店面}]已使用，详情可微信查询。', 1)
+GO
+INSERT [dbo].[TSmsTemplate] ([Id], [TenantId], [KeyName], [Title], [Template], [IsEnable]) VALUES (6, 1, N'CouponReceiveSms', N'代金券领取通知', N'尊敬的{会员姓名}您好,恭喜您获得{代金券名称}1张,验证码{验证码},将于{到期时间}过期,请妥善保管!', 1)
+GO
+INSERT [dbo].[TSmsTemplate] ([Id], [TenantId], [KeyName], [Title], [Template], [IsEnable]) VALUES (7, 1, N'CouponUseSms', N'代金券使用通知', N'您的验证码为{验证码}的{代金券名称}被使用，请核实!', 1)
+GO
+INSERT [dbo].[TSmsTemplate] ([Id], [TenantId], [KeyName], [Title], [Template], [IsEnable]) VALUES (8, 1, N'GoodsOrderSms', N'产品订单通知', N'您于{订购时间}成功订购{订购商品},验证码:{验证码},使用时请出示此验证码，详情可微信查询。', 1)
+GO
+INSERT [dbo].[TSmsTemplate] ([Id], [TenantId], [KeyName], [Title], [Template], [IsEnable]) VALUES (9, 1, N'AddMemberSms', N'会员登记通知', N'尊敬的{姓名}{性别}，恭喜您成为{公司}会员。卡号：{卡号},密码：{密码}，请妥善保管。', 1)
+GO
+INSERT [dbo].[TSmsTemplate] ([Id], [TenantId], [KeyName], [Title], [Template], [IsEnable]) VALUES (10, 1, N'ConsumeNoteSms', N'产品消费通知', N'您于{消费时间}在[{店面}]消费{折后总金额}元，获得{当次获得积分}积分。', 1)
+GO
+INSERT [dbo].[TSmsTemplate] ([Id], [TenantId], [KeyName], [Title], [Template], [IsEnable]) VALUES (11, 1, N'CountCosnumeSms', N'计次消费通知', N'您于{消费时间}在[{店面}]扣次消费{消费计次}。', 1)
+GO
+INSERT [dbo].[TSmsTemplate] ([Id], [TenantId], [KeyName], [Title], [Template], [IsEnable]) VALUES (12, 1, N'AddValueSms', N'会员充值通知', N'您于{充值时间}在[{店面}]充值{充值金额}元。', 1)
+GO
+INSERT [dbo].[TSmsTemplate] ([Id], [TenantId], [KeyName], [Title], [Template], [IsEnable]) VALUES (13, 1, N'AddCountSms', N'增加计次通知', N'您于{充次时间}在[{店面}]充次{增加计次}。', 1)
+GO
+INSERT [dbo].[TSmsTemplate] ([Id], [TenantId], [KeyName], [Title], [Template], [IsEnable]) VALUES (14, 1, N'QuickConsumeSms', N'快捷消费通知', N'您于{积分时间}在[{店面}]消费{消费金额}元，获得积分{本次积分}分。', 0)
+GO
+INSERT [dbo].[TSmsTemplate] ([Id], [TenantId], [KeyName], [Title], [Template], [IsEnable]) VALUES (15, 1, N'RecommandMemberSms', N'消费推荐短信通知', N'您获得推荐的会员{会员姓名}(会员号:{会员卡号})消费奖励{本次推荐积分}分。', 1)
+GO
+INSERT [dbo].[TSmsTemplate] ([Id], [TenantId], [KeyName], [Title], [Template], [IsEnable]) VALUES (16, 1, N'WeiXinCheckCodeSms', N'微信会员卡验证码短信', N'验证码:{验证码}，您正在申请成为{公司}会员,验证码三十分钟内有效。', 1)
+GO
+INSERT [dbo].[TSmsTemplate] ([Id], [TenantId], [KeyName], [Title], [Template], [IsEnable]) VALUES (17, 1, N'MemberUpgrade', N'会员升级通知', N'恭喜您{会员姓名}!您已升级为{会员级别}。', 1)
+GO
+INSERT [dbo].[TSmsTemplate] ([Id], [TenantId], [KeyName], [Title], [Template], [IsEnable]) VALUES (18, 1, N'ToStoreConsumeSms', N'到店付短信通知', N'会员{卡号}于{消费时间}在{店面}消费{消费金额}元，获得积分{本次积分}。', 1)
+GO
+INSERT [dbo].[TSmsTemplate] ([Id], [TenantId], [KeyName], [Title], [Template], [IsEnable]) VALUES (19, 1, N'RecommendRegister', N'推荐人售卡通知', N'恭喜您的推荐的{会员}购卡成功，本次获得奖励{奖励额度}元。', 1)
+GO
+SET IDENTITY_INSERT [dbo].[TSmsTemplate] OFF
+GO
