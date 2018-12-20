@@ -1,1 +1,2 @@
 update TBalanceNote set Balance=Value where Balance<=0
+update TComment set CreationTime=DATEADD(MONTH, -1,CreationTime)
