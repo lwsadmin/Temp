@@ -1,1 +1,2 @@
 
+update TMember set WeChatName=WeChatName+WeChatName,FullName=FullName+FullName where len(WeChatName)<=1
