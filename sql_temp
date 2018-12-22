@@ -1,1 +1,68 @@
 
+USE [UnionMallDb]
+GO
+/****** Object:  Table [dbo].[TOperateModule]    Script Date: 2018/12/22 15:06:22 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TOperateModule](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[TenantId] [int] NULL CONSTRAINT [DF_TOperateModule_TenantId]  DEFAULT ((0)),
+	[Title] [nvarchar](20) NOT NULL CONSTRAINT [DF_TOperateModule_Title]  DEFAULT ((0)),
+	[Visabled] [bit] NOT NULL,
+	[LinkUrl] [nvarchar](100) NOT NULL,
+	[Icon] [nvarchar](100) NULL,
+	[Memo] [nvarchar](200) NULL,
+	[Sort] [int] NULL,
+	[Version] [int] NULL,
+	[KeyName] [nvarchar](20) NULL,
+	[Type] [int] NOT NULL,
+ CONSTRAINT [PK_TOperateModule] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET IDENTITY_INSERT [dbo].[TOperateModule] ON 
+
+GO
+INSERT [dbo].[TOperateModule] ([Id], [TenantId], [Title], [Visabled], [LinkUrl], [Icon], [Memo], [Sort], [Version], [KeyName], [Type]) VALUES (1, 0, N'限时秒杀', 1, N'', N'', NULL, 0, 1, N'PanicBuy', 1)
+GO
+INSERT [dbo].[TOperateModule] ([Id], [TenantId], [Title], [Visabled], [LinkUrl], [Icon], [Memo], [Sort], [Version], [KeyName], [Type]) VALUES (2, 0, N'平台商家', 1, N'', N'', NULL, 0, 1, N'business', 1)
+GO
+INSERT [dbo].[TOperateModule] ([Id], [TenantId], [Title], [Visabled], [LinkUrl], [Icon], [Memo], [Sort], [Version], [KeyName], [Type]) VALUES (3, 0, N'积分商城', 1, N'', N'', N'', 3, 1, N'point', 1)
+GO
+INSERT [dbo].[TOperateModule] ([Id], [TenantId], [Title], [Visabled], [LinkUrl], [Icon], [Memo], [Sort], [Version], [KeyName], [Type]) VALUES (4, 0, N'热门资讯', 1, N'', N'', N'', 4, 1, NULL, 1)
+GO
+INSERT [dbo].[TOperateModule] ([Id], [TenantId], [Title], [Visabled], [LinkUrl], [Icon], [Memo], [Sort], [Version], [KeyName], [Type]) VALUES (5, 0, N'一元云购', 1, N'', N'', N'', 5, 1, N'takeout', 1)
+GO
+INSERT [dbo].[TOperateModule] ([Id], [TenantId], [Title], [Visabled], [LinkUrl], [Icon], [Memo], [Sort], [Version], [KeyName], [Type]) VALUES (6, 0, N'多人拼团', 1, N'', N'', NULL, 6, 1, N'groupbuy', 1)
+GO
+INSERT [dbo].[TOperateModule] ([Id], [TenantId], [Title], [Visabled], [LinkUrl], [Icon], [Memo], [Sort], [Version], [KeyName], [Type]) VALUES (7, 0, N'微商城', 1, N'', N'', N'', 7, 1, N'crowdfunding', 1)
+GO
+INSERT [dbo].[TOperateModule] ([Id], [TenantId], [Title], [Visabled], [LinkUrl], [Icon], [Memo], [Sort], [Version], [KeyName], [Type]) VALUES (8, 0, N'领优惠券', 1, N'', N'', N'', 8, 1, N'message', 1)
+GO
+INSERT [dbo].[TOperateModule] ([Id], [TenantId], [Title], [Visabled], [LinkUrl], [Icon], [Memo], [Sort], [Version], [KeyName], [Type]) VALUES (9, 0, N'微店分销', 1, N'', N'', N'', 9, 1, N'memberstore', 1)
+GO
+INSERT [dbo].[TOperateModule] ([Id], [TenantId], [Title], [Visabled], [LinkUrl], [Icon], [Memo], [Sort], [Version], [KeyName], [Type]) VALUES (10, 0, N'会员福利', 1, N'', N'', N'', 11, 1, N'coupon', 1)
+GO
+INSERT [dbo].[TOperateModule] ([Id], [TenantId], [Title], [Visabled], [LinkUrl], [Icon], [Memo], [Sort], [Version], [KeyName], [Type]) VALUES (11, 0, N'幸运抽奖', 1, N'', N'', NULL, 12, 1, N'wheel', 1)
+GO
+INSERT [dbo].[TOperateModule] ([Id], [TenantId], [Title], [Visabled], [LinkUrl], [Icon], [Memo], [Sort], [Version], [KeyName], [Type]) VALUES (15, 1, N'联想招商', 1, N' ', NULL, NULL, 0, 2, N'bu', 1)
+GO
+INSERT [dbo].[TOperateModule] ([Id], [TenantId], [Title], [Visabled], [LinkUrl], [Icon], [Memo], [Sort], [Version], [KeyName], [Type]) VALUES (16, 1, N'一元夺宝', 1, N'', N'', N'', 5, 1, N'takeout', 1)
+GO
+INSERT [dbo].[TOperateModule] ([Id], [TenantId], [Title], [Visabled], [LinkUrl], [Icon], [Memo], [Sort], [Version], [KeyName], [Type]) VALUES (17, 1, N'幸运抽奖', 1, N'', N'', NULL, 12, 0, N'wheel', 1)
+GO
+SET IDENTITY_INSERT [dbo].[TOperateModule] OFF
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'是否显示' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'TOperateModule', @level2type=N'COLUMN',@level2name=N'Visabled'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'连接地址' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'TOperateModule', @level2type=N'COLUMN',@level2name=N'LinkUrl'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'图标' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'TOperateModule', @level2type=N'COLUMN',@level2name=N'Icon'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'备注' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'TOperateModule', @level2type=N'COLUMN',@level2name=N'Memo'
+GO
