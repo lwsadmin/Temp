@@ -1,72 +1,100 @@
 USE [UnionMallDb]
 GO
-/****** Object:  Table [dbo].[TCommonAttribute]    Script Date: 2018/12/25 17:43:27 ******/
+/****** Object:  StoredProcedure [dbo].[Global_GetPagedList]    Script Date: 2018/12/28 21:18:17 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[TCommonAttribute](
-	[Id] [bigint] IDENTITY(1,1) NOT NULL,
-	[TenantId] [int] NOT NULL,
-	[DataType] [nvarchar](50) NOT NULL,
-	[Name] [nvarchar](200) NOT NULL,
-	[ValueName] [nvarchar](50) NOT NULL,
-	[DefultValue] [nvarchar](200) NULL,
-	[Options] [nvarchar](500) NULL,
-	[Type] [int] NOT NULL,
- CONSTRAINT [PK_TAttribute] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
 
-GO
-/****** Object:  Table [dbo].[TGoods]    Script Date: 2018/12/25 17:43:27 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[TGoods](
-	[Id] [bigint] IDENTITY(1,1) NOT NULL,
-	[TenantId] [int] NOT NULL,
-	[CategoryId] [bigint] NOT NULL,
-	[BrandId] [bigint] NOT NULL,
-	[ChainStoreId] [bigint] NOT NULL,
-	[Name] [nvarchar](200) NOT NULL,
-	[Status] [int] NOT NULL,
-	[Type] [int] NOT NULL,
-	[RecommendType] [nvarchar](200) NOT NULL,
-	[Image] [nvarchar](200) NULL,
-	[Click] [int] NOT NULL,
-	[Stock] [int] NOT NULL,
-	[SellCount] [int] NOT NULL,
-	[RetailPrice] [decimal](18, 2) NOT NULL,
-	[Price] [decimal](18, 2) NOT NULL,
-	[Sort] [int] NOT NULL,
-	[Remark] [nvarchar](50) NULL,
-	[Detail] [nvarchar](max) NULL,
- CONSTRAINT [PK_TGoods] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+ALTER procedure [dbo].[Global_GetPagedList]
+ @PageIndex int = 1,      -- 当前页码
+ @PageSize int = 10,     -- 每页记录条数(页面大小)
+ @Table nvarchar(max),    -- 表名或视图名，可以是嵌套SQL
+ @PageTable nvarchar(max)='',--已经是写好的分页数据
+ @OrderBy nvarchar(100) = 'Id desc', -- 排序规则
+ @IdSql nvarchar(max)='',    -- id字查询
+ @TotalCount int output,    -- 记录总数
+ @Descript varchar(1000) output  -- 结果描述
+as
+begin
+ Set ROWCOUNT @PageSize;
 
-GO
-ALTER TABLE [dbo].[TGoods] ADD  CONSTRAINT [DF_TGoods_BusinessId]  DEFAULT ((0)) FOR [ChainStoreId]
-GO
-ALTER TABLE [dbo].[TGoods] ADD  CONSTRAINT [DF_TGoods_status]  DEFAULT ((0)) FOR [Status]
-GO
-ALTER TABLE [dbo].[TGoods] ADD  CONSTRAINT [DF_TGoods_Type]  DEFAULT ((0)) FOR [Type]
-GO
-ALTER TABLE [dbo].[TGoods] ADD  CONSTRAINT [DF_TGoods_Click]  DEFAULT ((0)) FOR [Click]
-GO
-ALTER TABLE [dbo].[TGoods] ADD  CONSTRAINT [DF_TGoods_Stock]  DEFAULT ((1)) FOR [Stock]
-GO
-ALTER TABLE [dbo].[TGoods] ADD  CONSTRAINT [DF_TGoods_SellCount]  DEFAULT ((0)) FOR [SellCount]
-GO
-ALTER TABLE [dbo].[TGoods] ADD  CONSTRAINT [DF_TGoods_RetailPrice]  DEFAULT ((0)) FOR [RetailPrice]
-GO
-ALTER TABLE [dbo].[TGoods] ADD  CONSTRAINT [DF_TGoods_Price]  DEFAULT ((0)) FOR [Price]
-GO
-ALTER TABLE [dbo].[TGoods] ADD  CONSTRAINT [DF_TGoods_Sort]  DEFAULT ((0)) FOR [Sort]
-GO
+ Set @Descript = 'successful';
+ -------------------参数检测----------------
+ IF LEN(RTRIM(LTRIM(@Table))) !> 0
+ Begin
+  Set @Descript = 'table name is empty';
+  return;
+ end
+
+ if isnull(@PageSize,0) <= 0
+ begin
+  Set @Descript = '页大小不能为0';
+  Return;
+ end
+
+ if isnull(@PageIndex,0) <= 0
+ begin
+  set @Descript = '页码不能小于1';
+  return;
+ end
+ -------------------检测结束----------------
+if len(rtrim(ltrim(@OrderBy))) !>0
+begin
+	set @OrderBy = 'id';
+end
+if len(rtrim(ltrim(@IdSql))) !>0
+begin
+	  set @Descript = '@IdSql必填';
+  return;
+end
+ begin try
+  -- 整合SQL
+  declare @SQL nvarchar(max)
+  declare @replce nvarchar(max)
+  set @replce=replace(@IdSql,' count(',' ')
+  set @replce=replace(@replce,'id)','id')
+  set @replce=replace(@replce,'id )','id')
+
+    set @SQL = 'Set @Rows = (' + @IdSql + ')';
+	print @SQL
+  -- 执行SQL, 取总记录
+  execute sp_executesql @SQL, N'@Rows int output', @TotalCount output;
+  if  len(rtrim(ltrim(@PageTable)))!=0
+   begin
+     print @PageTable
+     -- 执行SQL, 取当前页记录集
+    execute(@PageTable);
+   end
+else
+begin
+  set @SQL =@replce+' order by '+@OrderBy+' OFFSET '+cast((@PageIndex-1)*@PageSize as nvarchar(max))+' ROW FETCH NEXT '+cast(@PageSize as nvarchar(20))+' ROWS only';
+  print @SQL
+  set @Table+=' and '+substring(@replce,charindex('id',@replce)-2,1)+'.id in('+@SQL+') order by '+@OrderBy
+
+   print @Table
+     -- 执行SQL, 取当前页记录集
+    execute(@Table);
+  end
+
+ end try
+ begin catch
+  -- 捕捉错误
+  set @Descript = 'error line: ' + cast(error_line() as varchar(8)) + ', error number: ' + cast(error_number() as varchar(8)) + ', error message: ' + error_message();
+  return;
+ end catch;
+
+ -- 执行成功
+ return;
+end
+
+
+
+----2----------------------------------------------
+set ansi_nulls on
+set quoted_identifier on
+
+
+
+
+
